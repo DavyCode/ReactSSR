@@ -7001,16 +7001,32 @@ module.exports = memoizeStringOnly;
 "use strict";
 
 
-var express = __webpack_require__(52),
-    app = express(),
-    React = __webpack_require__(16),
-    renderToString = __webpack_require__(108).renderToString,
-    Home = __webpack_require__(117).default;
+var _express = __webpack_require__(52);
+
+var _express2 = _interopRequireDefault(_express);
+
+var _react = __webpack_require__(16);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _server = __webpack_require__(108);
+
+var _Home = __webpack_require__(117);
+
+var _Home2 = _interopRequireDefault(_Home);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var app = (0, _express2.default)();
+
+app.use(_express2.default.static('public'));
 
 app.get('/', function (req, res) {
-  var content = renderToString(React.createElement(Home, null));
+  var content = (0, _server.renderToString)(_react2.default.createElement(_Home2.default, null));
 
-  res.send(content);
+  var html = '\n  <html lang="en">\n    <head></head>\n    <body>\n      <div>' + content + '</div>\n      <script src="bundle.js" ></script>\n    </body>\n  </html>\n  ';
+
+  res.send(html);
 });
 
 app.listen(3000, function () {
@@ -22124,7 +22140,7 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = function (params) {
+exports.default = function () {
   return _react2.default.createElement(
     'div',
     null,
@@ -22132,6 +22148,13 @@ exports.default = function (params) {
       'h1',
       null,
       'Home content'
+    ),
+    _react2.default.createElement(
+      'button',
+      { onClick: function onClick() {
+          console.log('button clicked!!!!!');
+        } },
+      'Click'
     )
   );
 };
